@@ -8,7 +8,8 @@ import glob
 import os.path
 import pytz
 
-__version__ = '0.1.1'
+__version__ = '0.1'
+
 
 class TOD(object):
     def __init__(self, filename, usecols=None):
@@ -36,10 +37,11 @@ class TOD(object):
 #         return pds.concat(todAll, axis=0)
 
 def gentod(filename, usecols=None, skip=1, colslabel=None):
-    tod = TOD(filename, usecols=usecols)
+    tod = TOD(filename, usecols, skip)
     return pds.DataFrame(tod._vals[::skip], index=tod.dates(skip), columns=colslabel)
 def gentod_all(dirname, usecols=None, skip=1, colslabel=None, extension='dat'):
     todAll = []
     for f in sorted(glob.glob('%s/*.%s' % (dirname, extension))):
-        todAll.append(gentod(f, usecols=usecols, skip=skip, colslabel=colslabel))
+        todAll.append(gentod(f, usecols, skip, colslabel))
     return pds.concat(todAll, axis=0)
+    
