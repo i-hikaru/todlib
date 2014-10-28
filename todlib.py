@@ -5,7 +5,6 @@ import numpy as np
 import datetime as dt
 import pandas as pds
 import glob
-import os.path
 import pytz
 
 __version__ = '0.1.1'
