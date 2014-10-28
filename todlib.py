@@ -25,15 +25,6 @@ class TOD(object):
         return self._vals[::skip]
     def get_channel_vals(self, channel, skip=1):
         return self._vals[:,channel:skip]
-#     def gentod(self, skip=1, colslabel=None):
-#         return pds.DataFrame(self._vals[::skip], index=self.dates(skip), columns=colslabel)
-#     def gentod_all(self, directory=None, extension='dat', colslabel=None):
-#         if not directory: directory = os.path.dirname(self._filename)
-#         todAll = []
-#         for f in sorted(glob.glob('%s/*.%s' % (directory, extension))):
-#             tod = TOD(f, usecols=self._usecols)
-#             todAll.append(tod.gentod(colslabel=colslabel))
-#         return pds.concat(todAll, axis=0)
 
 def gentod(filename, usecols=None, skip=1, colslabel=None):
     tod = TOD(filename, usecols=usecols)
