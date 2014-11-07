@@ -6,8 +6,9 @@ import datetime as dt
 import pandas as pds
 import glob
 import pytz
+import os.path
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 class TOD(object):
     def __init__(self, filename, usecols=None):
@@ -31,5 +32,6 @@ def gentod(filename, usecols=None, skip=1, colslabel=None):
 def gentod_all(dirname, usecols=None, skip=1, colslabel=None, extension='dat'):
     todAll = []
     for f in sorted(glob.glob('%s/*.%s' % (dirname, extension))):
+        if os.path.getsize(f) < 200: continue
         todAll.append(gentod(f, usecols=usecols, skip=skip, colslabel=colslabel))
     return pds.concat(todAll, axis=0)
